@@ -1,38 +1,93 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #222;
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.4rem;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  }
-  
-  .title {
-    flex: 1;
-    text-align: center;
-    font-family: 'Arial Black', sans-serif;
-  }
-  
-  .nav {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .nav button {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.3rem 0.6rem;
-    transition: background 0.3s ease;
-    border-radius: 5px;
-  }
-  
-  .nav button:hover,
-  .nav button.active {
-    background: #555;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  color: white;
+  padding: 1rem 2rem;
+  padding: 0.95rem 1.9rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Arial Black', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none; /* Eliminar subrayado */
+  padding: 0; /* Sin padding extra */
+}
+
+
+
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  transition: background 0.3s ease;
+  border-radius: 5px;
+}
+
+.nav button:hover,
+.nav button.active {
+  background: #555;
+}
+
+.carrito-btn {
+  position: relative;
+}
+
+.carrito-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.badge.animate {
+  animation: bounce 0.3s ease;
+}
+
+.carrito-icon {
+  width: 24px;
+  height: 24px;
+  display: block; /* evita espacio debajo */
+  object-fit: contain;
+}

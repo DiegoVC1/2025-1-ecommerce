@@ -1,7 +1,15 @@
 <header class="header">
-    <div class="title">DISC.US</div>
+    <div class="logo-container">
+      <a class="title" [routerLink]="['/']">DISC.US</a>
+    </div>
     <nav class="nav">
-        <button [routerLink]="['/catalogo']">Catálogo</button>
-        <button [routerLink]="['/carrito']">Carrito</button>
+      <button [routerLink]="['/catalogo']">Catálogo</button>
+      <button [routerLink]="['/carrito']" class="carrito-btn">
+        <img src="assets/carrito.svg" alt="Carrito" class="carrito-icon" />
+        @if(totalItems() > 0){
+          <span class="badge" [class.animate]="animar()">{{ totalItems() }}</span>
+        }
+      </button>
     </nav>
   </header>
+  

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 export interface ItemCarrito {
   album: string;
   artista: string;
   imagen: string;
   cantidad: number;
-  precio: number; // Aseguramos que el precio sea un número
+  precio: number;
 }
 
 @Injectable({
@@ -16,6 +16,8 @@ export class CarritoService {
   private carrito: ItemCarrito[] = [];
   private datosUsuario: any = null;
 
+  totalItemsSignal = signal(0); // Nuevo signal reactivo
+
   constructor() {
     this.cargarCarrito();
     this.cargarDatosUsuario();
@@ -24,10 +26,12 @@ export class CarritoService {
   private cargarCarrito(): void {
     const data = localStorage.getItem(this.claveLS);
     this.carrito = data ? JSON.parse(data) : [];
+    this.actualizarSignal(); // Inicializar signal
   }
 
   public guardarCarrito(): void {
     localStorage.setItem(this.claveLS, JSON.stringify(this.carrito));
+    this.actualizarSignal();
   }
 
   obtenerCarrito(): ItemCarrito[] {
@@ -38,10 +42,9 @@ export class CarritoService {
     const precio = Number(album.precio);
     const cantidad = Number(album.cantidad);
 
-    // Validamos que precio y cantidad sean válidos
     if (isNaN(precio) || isNaN(cantidad) || cantidad <= 0) {
       console.error('Precio o cantidad inválidos');
-      return; // No agregamos el item si los datos son inválidos
+      return;
     }
 
     const existente = this.carrito.find(item => item.album === album.album);
@@ -52,10 +55,11 @@ export class CarritoService {
         album: album.album,
         artista: album.artista,
         imagen: album.imagen,
-        cantidad: cantidad,
-        precio: precio // Aseguramos que el precio sea un número
+        cantidad,
+        precio
       });
     }
+
     this.guardarCarrito();
   }
 
@@ -64,7 +68,7 @@ export class CarritoService {
     if (item) {
       item.cantidad = nuevaCantidad;
       if (item.cantidad <= 0) {
-        this.eliminarItem(album); // Eliminar si la cantidad es 0
+        this.eliminarItem(album);
       }
       this.guardarCarrito();
     }
@@ -75,17 +79,29 @@ export class CarritoService {
     this.guardarCarrito();
   }
 
-
-
   vaciarCarrito(): void {
-    this.carrito = [];  // Vaciar el arreglo del carrito en memoria
-    localStorage.removeItem(this.claveLS);  // Eliminar el carrito de localStorage
+    this.carrito = [];
+    localStorage.removeItem(this.claveLS);
+    this.actualizarSignal();
   }
 
+  total(): number {
+    return this.carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  }
+
+  totalItems(): number {
+    return this.carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  }
+
+  private actualizarSignal(): void {
+    this.totalItemsSignal.set(this.totalItems());
+  }
+
+  // Usuario y resumen: sin cambios
   guardarResumenCarrito(): void {
     localStorage.setItem('resumenCarrito', JSON.stringify(this.carrito));
   }
-  
+
   obtenerResumenCarrito(): ItemCarrito[] {
     const data = localStorage.getItem('resumenCarrito');
     return data ? JSON.parse(data) : [];
@@ -104,14 +120,4 @@ export class CarritoService {
   obtenerDatosUsuario() {
     return this.datosUsuario;
   }
-
-  total(): number {
-    return this.carrito.reduce((acc, item) => {
-      const precio = Number(item.precio);
-      const cantidad = Number(item.cantidad);
-      return acc + (isNaN(precio) || isNaN(cantidad) ? 0 : precio * cantidad);
-    }, 0);
-  }
-
-  
 }
