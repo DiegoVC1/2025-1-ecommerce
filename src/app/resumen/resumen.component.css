@@ -1,0 +1,90 @@
+.resumen-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .resumen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Reemplaza la última fila cuando hay fila incompleta con flex */
+  .resumen-grid.fila-incompleta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .resumen-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    gap: 20px;
+    width: 300px; /* ancho fijo para que se centren bien en flex */
+  }
+  
+  .resumen-imagen {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .resumen-detalle {
+    text-align: left;
+  }
+  
+  .resumen-total {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .resumen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .resumen-fila-incompleta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .resumen-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    gap: 20px;
+    width: 100%;
+    max-width: 425px; /* un poco más largo */
+    margin: 0 10px; /* espacio lateral entre items centrados */
+  }
+  

@@ -1,0 +1,26 @@
+<div class="catalogo-container">
+    @for (album of albums; track album) {
+      <div class="album-card">
+        <img [src]="'assets/img/' + album.imagen" [alt]="album.album" class="album-img"
+             (mouseover)="probarAudio(album.audio)" (mouseout)="detenerAudio()" />
+        <h3>{{ album.album }}</h3>
+        <p class="artist">
+          <img [src]="'assets/flags/' + album.pais + '.png'" alt="{{ album.pais }}" class="flag" />
+          {{ album.artista }}
+        </p>
+        <p>Año: {{ album.anio }}</p>
+        <p class="precio">{{ album.precio }}</p>
+  
+        <div class="cantidad">
+          <button (click)="decrementarCantidad(album)">−</button>
+          <span>{{ album.cantidad }}</span>
+          <button (click)="incrementarCantidad(album)">+</button>
+        </div>
+  
+        <button class="add" (click)="agregarAlCarrito(album)" [disabled]="album.cantidad === 0">
+          Añadir al carrito
+        </button>
+      </div>
+    }
+  </div>
+  

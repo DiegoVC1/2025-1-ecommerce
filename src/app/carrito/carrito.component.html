@@ -1,0 +1,33 @@
+<h2>🛒 Tu carrito</h2>
+
+@if(carrito.length === 0) {
+  <p>Tu carrito está vacío.</p>
+}
+
+@if(carrito.length > 0) {
+    <ul class="carrito-lista">
+        @for (item of carrito; track item) {
+          <li class="item-carrito">
+            <img [src]="'assets/img/' + item.imagen" alt="{{ item.album }}" />
+            <div>
+              <h4>{{ item.album }}</h4>
+              <p>{{ item.artista }}</p>
+              <div class="cantidad">
+                <button (click)="actualizarCantidad(item.album, item.cantidad - 1)" [disabled]="item.cantidad === 1">-</button>
+                <span>{{ item.cantidad }}</span>
+                <button (click)="actualizarCantidad(item.album, item.cantidad + 1)">+</button>
+              </div>
+              <button class="eliminar" (click)="eliminarItem(item.album)">Eliminar</button>
+            </div>
+            <!-- Precio parcial alineado a la derecha -->
+            <div class="precio-parcial">${{ item.precio * item.cantidad }}</div>
+          </li>
+        }
+      </ul>
+
+  <div class="carrito-total">
+    <strong>Total: ${{ total() }}</strong>
+  </div>
+
+  <button class="checkout-btn btn-primary" routerLink="/checkout">Ir a checkout</button>
+}

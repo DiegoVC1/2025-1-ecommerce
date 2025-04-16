@@ -1,0 +1,6 @@
+.main-container {
+    min-height: calc(100vh - 120px); /* ajustando para header y footer */
+    padding: 20px;
+    background-color: #f7f7f7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }

@@ -1,0 +1,41 @@
+<div class="resumen-container">
+    <h2>¡Tu compra está en camino, {{ usuario?.nombre }}!</h2>
+    <p>Te mostramos un resumen de tu compra:</p>
+  
+    <!-- Parte con filas completas -->
+    <div class="resumen-grid">
+      @for (item of itemsFilaCompleta(); track item.album) {
+        <div class="resumen-item">
+          <img [src]="'assets/img/' + item.imagen" alt="Imagen del album" class="resumen-imagen" />
+          <div class="resumen-detalle">
+            <h4>{{ item.album }} - {{ item.artista }}</h4>
+            <p>Cantidad: {{ item.cantidad }}</p>
+            <p>Precio: ${{ item.cantidad * item.precio }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  
+    <!-- Parte con la última fila incompleta, centrada -->
+    @if (itemsFilaIncompleta().length > 0) {
+      <div class="resumen-fila-incompleta">
+        @for (item of itemsFilaIncompleta(); track item.album) {
+          <div class="resumen-item">
+            <img [src]="'assets/img/' + item.imagen" alt="Imagen del album" class="resumen-imagen" />
+            <div class="resumen-detalle">
+              <h4>{{ item.album }} - {{ item.artista }}</h4>
+              <p>Cantidad: {{ item.cantidad }}</p>
+              <p>Precio: ${{ item.cantidad * item.precio }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  
+    <div class="resumen-total">
+      <h3>Total: ${{ totalTemp() }}</h3>
+    </div>
+  
+    <button (click)="regresarCatalogo()">Regresar a catálogo</button>
+  </div>
+  

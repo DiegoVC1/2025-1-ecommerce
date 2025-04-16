@@ -1,0 +1,21 @@
+<h2>Checkout</h2>
+
+<form (ngSubmit)="colocarPedido()" #checkoutForm="ngForm" class="formulario-checkout">
+
+  <label for="nombre">Nombre:</label>
+  <input id="nombre" [(ngModel)]="nombre" name="nombre" required />
+
+  <label for="direccion">Dirección:</label>
+  <input id="direccion" [(ngModel)]="direccion" name="direccion" required />
+
+  <label for="tarjeta">Número de tarjeta:</label>
+  <input id="tarjeta" [(ngModel)]="tarjeta" name="tarjeta" required />
+
+  <label for="vencimiento">Fecha de vencimiento:</label>
+  <input id="vencimiento" [(ngModel)]="vencimiento" name="vencimiento" placeholder="MM/AA" required />
+
+  <label for="cvv">CVV:</label>
+  <input id="cvv" [(ngModel)]="cvv" name="cvv" required />
+
+  <button (click)="colocarPedido()" type="submit">Colocar pedido</button>
+</form>
